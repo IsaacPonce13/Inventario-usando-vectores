@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Inventario con Vectores</title>
+        <script src="/Inventario_Vectores/Inventario.js"></script>
+    </head>
+    <body>
+        <div id="App">
+            <form id="Formulario">
+                <!-- Inputs, entrada de datos -->
+                <label for="Codigo_P">
+                    Introdusca el codigo del producto: <input type="number" id="Codigo_P_txtb" name="codigo" size="30">
+                </label><br>
+                <label for="Nombre_P">
+                    Introdusca el nombre del producto: <input type="text" id="Nombre_P_txtb" name="Nombre"><br>
+                </label>
+                <label for="Cantidad_P">
+                    Introdusca la cantidad de producto: <input type="number" id="Cantidad_P_txtb" name="Cantidad"><br>
+                </label>
+                <label for="Costo_P">
+                    Introdusca el costo del producto: <input type="number" id="Costo_P_txtb" name="Costo"><br>
+                </label>
+                <!-- <label for="Insertar_P">
+                    Posicion en lista donde se agregara el producto: <input type="number" id="Insertar_P_txtb"><br>
+                </label>      -->
+                <button type="reset" id="Agregar_P_btn">Agregar producto</button><br><br>
+
+                <!-- Buscar productos -->
+                <label for="Buscar_P">
+                    Introdusca el codigo de producto: <input type="number" id="Buscar_P_txtb">
+                </label>
+                <button type="reset" id="Buscar_P_btn">Buscar</button>
+                <!-- Eliminar Productos -->
+                <button type="reset" id="Eliminar_P_btn">Eliminar</button><br><br>
+
+                <!-- Mostrar productos -->
+                <button type="button" id="Mostrar_I_btn">Mostrar lista de productos</button>
+                <button type="button" id="Mostrar_Inver_btn">Mostrar lista de productos invertida</button>
+                <h3>Productos:</h3>
+                <div id="info">
+                </div>
+                <button type="button" id="Limpiar_L_btn">Limpiar listado</button><br><br>
+            </form>
+        </div>
+
+        <script>
+            //Objeto inventario
+            const inventario = new Inventario();
+            //Accion del boton Agregar
+            const AgregarProd = document.getElementById('Agregar_P_btn');
+            AgregarProd.addEventListener("click",()=>{
+                //Obtener info
+                let codigo = document.getElementById("Codigo_P_txtb").value;
+                let nombre = document.getElementById("Nombre_P_txtb").value;
+                let cantidad = document.getElementById("Cantidad_P_txtb").value;
+                let costo = document.getElementById("Costo_P_txtb").value;
+                // let posicion = document.getElementById("Insertar_P_txtb").value;
+                //Almacenar Producto
+                let NewProd = new Producto(codigo, nombre, cantidad, costo);
+                inventario.insertarProd(NewProd);
+                //Imprimir Mensaje
+                alert("Nuevo registro agregado")
+                console.log(inventario);
+            })
+
+            //Accion del boton Buscar
+            const BuscarProd = document.getElementById("Buscar_P_btn")
+            BuscarProd.addEventListener("click",()=>{
+                let codigoProd = document.getElementById("Buscar_P_txtb").value;
+                let ProdEnc = inventario.buscarProd(codigoProd);
+                if (ProdEnc==null)
+                    alert("Este producto no existe")
+                else{
+                    document.getElementById("info").innerHTML += ProdEnc.MostrarProd();
+                }
+            })
+
+            //Accion del boton Eliminar
+            const EliminarProd = document.getElementById("Eliminar_P_btn")
+            EliminarProd.addEventListener("click",()=>{
+                //Confirmar y eliminar
+                let codigoProd = document.getElementById("Buscar_P_txtb").value;
+                let ProdEnc = inventario.buscarProd(codigoProd);
+                if (ProdEnc==null)
+                    alert("Este producto no existe")
+                else{
+                    let conf = window.confirm("¿Eliminar registro?")
+                    if (conf === true) {
+                        inventario.eliminarProd(codigoProd);
+                    }
+                }
+
+            })
+
+            //Accion del boton Mostrar inventario
+            const ListarProd = document.getElementById("Mostrar_I_btn")
+            ListarProd.addEventListener("click",()=>{
+                document.getElementById("info").innerHTML += inventario.mostrarProd();
+            })
+                        //Accion del boton Mostrar inventario
+            const ListarProdInv = document.getElementById("Mostrar_Inver_btn")
+            ListarProdInv.addEventListener("click",()=>{
+                document.getElementById("info").innerHTML += inventario.mostrarProdInver();
+            })
+            //Limpiar lista mostrada en pantalla
+            const LimpiarList = document.getElementById("Limpiar_L_btn")
+            LimpiarList.addEventListener("click",()=>{
+                document.getElementById("info").innerHTML = "";
+            })
+        </script>
+    </body>
+</html>
