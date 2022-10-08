@@ -16,17 +16,24 @@ class Inventario{
     }
 
     insertarProd(NewProd, posicion){
-        //Agregar Producto
-        this.ListaP.push(NewProd);
         //Agregar Producto en posición deseada
-        // if (posicion != 0) {
-        //     let aux;
-        //     aux = this.ListaP[posicion+1]
-        //     for (let i = 0; i > posicion + 1; i++){
-        //         this.ListaP[i] = this.ListaP[i+1]
-        //     }
-        //     this.ListaP[this.ListaP.length+1] = aux;
-        // }
+        if (posicion != 0) {
+            this.ListaP.push(NewProd);
+            for (let i=0; i < this.ListaP.length; i++){
+                    if (i > posicion-1) {
+                        let aux = this.ListaP[this.ListaP.length-1];
+                        for (let j = 0; j > posicion-1 && j < this.ListaP.length; j++) {
+                            this.ListaP[j] = this.ListaP[j+1];
+                        }
+                        this.ListaP[posicion-1] = aux;
+                    }
+            } 
+            console.log(this.ListaP);
+        }else{
+            console.log("no");
+            this.ListaP.push(NewProd);
+            console.log(NewProd);
+        }
     }
 
     buscarProd(codigoProd){
@@ -34,8 +41,7 @@ class Inventario{
             if(this.ListaP[i].codigo == codigoProd){
                 return this.ListaP[i];
             }
-        }
-        return null;
+        }    
     }
     eliminarProd(codigoProd){
         let ValorArray = this.ListaP.length-1;
@@ -43,7 +49,7 @@ class Inventario{
             if(this.ListaP[i].codigo == codigoProd){
                 let aux = this.ListaP[i];
                 for (let j = 0; j < this.ListaP.length; j++) {
-                    this.ListaP[j-1] = this .ListaP[j]
+                    this.ListaP[j-1] = this.ListaP[j]
                 }
                 this.ListaP[ValorArray] = aux;
                 this.ListaP.pop();

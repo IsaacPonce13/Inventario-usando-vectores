@@ -23,9 +23,9 @@
                 <label for="Costo_P">
                     Introdusca el costo del producto: <input type="number" id="Costo_P_txtb" name="Costo"><br>
                 </label>
-                <!-- <label for="Insertar_P">
-                    Posicion en lista donde se agregara el producto: <input type="number" id="Insertar_P_txtb"><br>
-                </label>      -->
+                <label for="Insertar_P">
+                    Posicion en lista donde se agregara el producto: <input type="number" id="Insertar_P_txtb" value="0"><br>
+                </label>
                 <button type="reset" id="Agregar_P_btn">Agregar producto</button><br><br>
 
                 <!-- Buscar productos -->
@@ -57,12 +57,11 @@
                 let nombre = document.getElementById("Nombre_P_txtb").value;
                 let cantidad = document.getElementById("Cantidad_P_txtb").value;
                 let costo = document.getElementById("Costo_P_txtb").value;
-                // let posicion = document.getElementById("Insertar_P_txtb").value;
+                let posicion = document.getElementById("Insertar_P_txtb").value;
                 //Almacenar Producto
                 let NewProd = new Producto(codigo, nombre, cantidad, costo);
-                inventario.insertarProd(NewProd);
+                inventario.insertarProd(NewProd,posicion,codigoProd);
                 //Imprimir Mensaje
-                alert("Nuevo registro agregado")
                 console.log(inventario);
             })
 
