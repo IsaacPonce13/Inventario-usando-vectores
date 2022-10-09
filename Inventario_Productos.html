@@ -58,9 +58,10 @@
                 let cantidad = document.getElementById("Cantidad_P_txtb").value;
                 let costo = document.getElementById("Costo_P_txtb").value;
                 let posicion = document.getElementById("Insertar_P_txtb").value;
+                let codigoProd = document.getElementById("Codigo_P_txtb").value;
                 //Almacenar Producto
                 let NewProd = new Producto(codigo, nombre, cantidad, costo);
-                inventario.insertarProd(NewProd,posicion,codigoProd);
+                inventario.insertarProd(NewProd, posicion, codigoProd);
                 //Imprimir Mensaje
                 console.log(inventario);
             })
