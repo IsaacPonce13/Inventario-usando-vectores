@@ -31,34 +31,35 @@ class Inventario{
     }
 
     buscarProd(codigoProd){
-        while (Prod.next != null) {
-            i++;
-        }
-        for (let j = codigoProd; j == i-1; j++) {
-            if (i == codigoProd) {
-                return Prod;
+        let temp = this.primero;
+        while (temp != null) {
+            if (temp.codigo = codigoProd) {
+                return temp
             }
+            temp = temp.next;
         }
+        return null;
     }
     eliminarProd(codigoProd){
-        while (Prod.next != null) {
-            i++;
+        if (this.primero == null) {
+            return false;
         }
-        for (let j = codigoProd; j == i-1; j++) {
-            let borrar = Prod;
-        if(borrar != null){
-            borrar.next = null;
-            borrar.next = null;
+        let temp = this.primero;
+        while (temp != null) {
+            if (temp.codigo = codigoProd) {
+                    temp = temp.next;
+                    temp.next = null;
+            }
+            return temp;
         }
-        return borrar;
-        }
+        return null;
         
     }
     mostrarProd(){
             let aux="";
             let temp=this.primero;
             while(temp!=null){
-                aux += temp.Prod + " ";
+                aux += temp + " ";
                 temp = temp.next;
             }
             return aux;

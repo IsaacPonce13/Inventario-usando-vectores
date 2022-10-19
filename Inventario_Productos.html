@@ -72,10 +72,10 @@
             BuscarProd.addEventListener("click",()=>{
                 let codigoProd = document.getElementById("Buscar_P_txtb").value;
                 let ProdEnc = inventario.buscarProd(codigoProd);
-                if (ProdEnc==null)
+                if (ProdEnc == null)
                     alert("Este producto no existe")
                 else{
-                    document.getElementById("info").innerHTML += ProdEnc.MostrarProd();
+                    document.getElementById("info").innerHTML += ProdEnc.Mostrar();
                 }
             })
 
@@ -99,7 +99,8 @@
             //Accion del boton Mostrar inventario
             const ListarProd = document.getElementById("Mostrar_I_btn")
             ListarProd.addEventListener("click",()=>{
-                console.log(inventario.mostrarProd());
+                let productos = inventario.mostrarProd();
+                document.getElementById("info").innerHTML += inventario.Mostrar();
             })
 
             //Accion del boton Mostrar inventario invertido
