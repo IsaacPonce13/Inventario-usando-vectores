@@ -48,7 +48,8 @@
 
         <script>
             //Objeto inventario
-            const inventario = new Inventario();
+        const inventario = new Inventario();
+
             //Accion del boton Agregar
             const AgregarProd = document.getElementById('Agregar_P_btn');
             AgregarProd.addEventListener("click",()=>{
@@ -61,7 +62,7 @@
                 let codigoProd = document.getElementById("Codigo_P_txtb").value;
                 //Almacenar Producto
                 let NewProd = new Producto(codigo, nombre, cantidad, costo);
-                inventario.insertarProd(NewProd, posicion, codigoProd);
+                inventario.agregar(NewProd, posicion);
                 //Imprimir Mensaje
                 console.log(inventario);
             })
@@ -98,13 +99,15 @@
             //Accion del boton Mostrar inventario
             const ListarProd = document.getElementById("Mostrar_I_btn")
             ListarProd.addEventListener("click",()=>{
-                document.getElementById("info").innerHTML += inventario.mostrarProd();
+                console.log(inventario.mostrarProd());
             })
-                        //Accion del boton Mostrar inventario
+
+            //Accion del boton Mostrar inventario invertido
             const ListarProdInv = document.getElementById("Mostrar_Inver_btn")
             ListarProdInv.addEventListener("click",()=>{
                 document.getElementById("info").innerHTML += inventario.mostrarProdInver();
             })
+
             //Limpiar lista mostrada en pantalla
             const LimpiarList = document.getElementById("Limpiar_L_btn")
             LimpiarList.addEventListener("click",()=>{

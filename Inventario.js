@@ -5,93 +5,71 @@ class Producto{
         this.cantidad = cantidad;
         this.costo = costo;
     }
-    MostrarProd(){
+    Mostrar(){
         return `<p> Codigo: ${this.codigo} Nombre: ${this.nombre} Cantidad: ${this.cantidad} Costo: $${this.costo}</p>`;
     }
 }
-
+class Nodo{
+    constructor (NewProd){
+    this.Prod = NewProd;
+    this.next = null;
+    }
+}
 class Inventario{
     constructor(){
-        this.ListaP = [];
+        this.primero = null;
     }
-
-    insertarProd(NewProd, posicion, codigoProd){
-        //Agregar Producto en posición deseada
-        if (posicion != 0) {
-            this.ListaP.push(NewProd);
-            for (let i=0; i < this.ListaP.length; i++){
-                    if (i > posicion-1) {
-                        let aux = this.ListaP[this.ListaP.length-1];
-                        for (let j = 0; j >= posicion-1 && j < this.ListaP.length; j++) {
-                            this.ListaP[j] = this.ListaP[j+1];
-                        }
-                        this.ListaP[posicion-1] = aux;
-                    }
-            } 
-            console.log(this.ListaP);   
-        }else{
-            //Aqui se va un if, para implementar que no se repitan codigos
-            this.ListaP.push(NewProd);
-            for (let i = 0; i < this.ListaP.length; i++) {
-                    if (this.ListaP[i].codigo < codigoProd && codigoProd < this.ListaP[i+1].codigo) {
-                        let pos = this.ListaP[i].codigo;
-                        let aux = this.ListaP[this.ListaP.length-1];
-                        for (let j = 0; j >= pos && j < this.ListaP.length; j++) {
-                            this.ListaP[i] = this.ListaP[i++];
-                        }
-                        this.ListaP[pos] = aux;
-                        console.log(pos);
-                    }
-                    // else if (this.ListaP[i].codigo > codigoProd && codigoProd > this.ListaP[i-1].codigo) {
-                    //     let pos = this.ListaP[i].codigo;
-                    //     let aux = this.ListaP[this.ListaP.length-1];
-                    //     for (let j = 0; j >= pos && j < this.ListaP.length; j++) {
-                    //         this.ListaP[i] = this.ListaP[i++];
-                    //     }
-                    //     this.ListaP[pos] = aux;
-                    //     console.log(pos);
-                    // }
-                
-            }
-            console.log(NewProd);
+    agregar(NewProd){
+        if (this.primero == null)
+            this.primero = NewProd;
+        else{
+            let temp = this.primero;
+            while (temp.next != null)
+                temp = temp.next;
+                temp.next = NewProd;
         }
     }
 
     buscarProd(codigoProd){
-        for (let i=0; i < this.ListaP.length; i++){
-            if(this.ListaP[i].codigo == codigoProd){
-                return this.ListaP[i];
+        while (Prod.next != null) {
+            i++;
+        }
+        for (let j = codigoProd; j == i-1; j++) {
+            if (i == codigoProd) {
+                return Prod;
             }
-        }    
+        }
     }
     eliminarProd(codigoProd){
-        let ValorArray = this.ListaP.length-1;
-        for (let i=0; i < this.ListaP.length; i++){
-            if(this.ListaP[i].codigo == codigoProd){
-                let aux = this.ListaP[i];
-                for (let j = 0; j < this.ListaP.length; j++) {
-                    this.ListaP[j-1] = this.ListaP[j]
-                }
-                this.ListaP[ValorArray] = aux;
-                this.ListaP.pop();
-            }
+        while (Prod.next != null) {
+            i++;
         }
-        alert("Producto eliminado")
+        for (let j = codigoProd; j == i-1; j++) {
+            let borrar = Prod;
+        if(borrar != null){
+            borrar.next = null;
+            borrar.next = null;
+        }
+        return borrar;
+        }
+        
     }
     mostrarProd(){
-
-        let aux=""
-        for (let i = 0; i < this.ListaP.length; i++) {
-            aux += this.ListaP[i].MostrarProd();
-        }
-        return aux;
+            let aux="";
+            let temp=this.primero;
+            while(temp!=null){
+                aux += temp.Prod + " ";
+                temp = temp.next;
+            }
+            return aux;
     }
     mostrarProdInver(){
-        let aux=""
-        for (let i = this.ListaP.length-1; i >= 0; i--) {
-            aux += this.ListaP[i].MostrarProd();
-        }
-        return aux;
+        if (this.primero==null)
+        this.primero = NewProd;
+    else{
+        NewProd.next = this.primero;
+        this.primero = NewProd;       
     }
+}
 
 }
